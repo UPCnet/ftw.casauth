@@ -1,8 +1,6 @@
 from AccessControl.requestmethod import postonly
 from AccessControl.SecurityInfo import ClassSecurityInfo
 from DateTime import DateTime
-from ftw.casauth.cas import service_url
-from ftw.casauth.cas import validate_ticket
 from Products.CMFCore.permissions import ManagePortal
 from Products.CMFCore.utils import getToolByName
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
@@ -12,10 +10,13 @@ from Products.PluggableAuthService.interfaces.plugins import IAuthenticationPlug
 from Products.PluggableAuthService.interfaces.plugins import IChallengePlugin
 from Products.PluggableAuthService.interfaces.plugins import IExtractionPlugin
 from Products.PluggableAuthService.plugins.BasePlugin import BasePlugin
+
+from ftw.casauth.cas import service_url
+from ftw.casauth.cas import validate_ticket
+from urllib.parse import quote
 from zope.component.hooks import getSite
 from zope.event import notify
-from zope.interface import implements
-import urllib
+from zope.interface import implementer
 
 
 manage_addCASAuthenticationPlugin = PageTemplateFile(
@@ -37,14 +38,10 @@ def addCASAuthenticationPlugin(self, id_, title=None, cas_server_url=None,
         )
 
 
+@implementer(IAuthenticationPlugin, IChallengePlugin, IExtractionPlugin)
 class CASAuthenticationPlugin(BasePlugin):
     """Plone PAS plugin for authentication against a CAS server.
     """
-    implements(
-        IAuthenticationPlugin,
-        IChallengePlugin,
-        IExtractionPlugin,
-    )
     meta_type = "CAS Authentication Plugin"
     security = ClassSecurityInfo()
 
@@ -77,7 +74,7 @@ class CASAuthenticationPlugin(BasePlugin):
 
         response.redirect('%s/login?service=%s' % (
             self.cas_server_url,
-            urllib.quote(service_url(request)),
+            quote(service_url(request)),
         ), lock=True)
         return True
 
