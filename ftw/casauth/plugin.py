@@ -93,7 +93,10 @@ class CASAuthenticationPlugin(BasePlugin):
         # Avoid having the `ticket` query string param show up in the
         # user's browser's address bar by redirecting back to the
         # service_url, which should have the ticket stripped from it
-        request.RESPONSE.redirect(creds['service_url'], lock=True)
+
+        # Comento el redirect porque si no se piden dos veces todos los recursos de la pagina
+        # con el ticket en la url y al hacer el redirect
+        # request.RESPONSE.redirect(creds['service_url'], lock=True)
 
         return creds
 
