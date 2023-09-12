@@ -1,11 +1,12 @@
 Changelog
 =========
 
-1.4.3 (unreleased)
-------------------
+1.0 (2023-09-12)
+----------------
 
-- Nothing changed yet.
-
+* Modificaciones para que funcione en python 3 [Pilar Marinas]
+* Passar a python 3 [Iago López]
+* Initial commit [Iago López]
 
 1.4.2 (2021-09-13)
 ------------------
