@@ -84,7 +84,7 @@ def service_url(request):
     url = request['ACTUAL_URL']
     if request['QUERY_STRING']:
         url = '%s?%s' % (url, request['QUERY_STRING'])
-        # url = strip_ticket(url)
+        url = strip_ticket(url)
     return url
 
 
@@ -94,7 +94,7 @@ def strip_ticket(url):
     """
     scheme, netloc, path, query, fragment = urlsplit(url)
     # Using parse_qsl here to preserve order
-    qs_params = filter(lambda k, v: k != 'ticket', parse_qsl(query))
+    qs_params = list(filter(lambda kv: kv[0] != 'ticket', parse_qsl(query)))
     query = urlencode(qs_params)
     new_url = urlunsplit((scheme, netloc, path, query, fragment))
     return new_url

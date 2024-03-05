@@ -94,9 +94,9 @@ class CASAuthenticationPlugin(BasePlugin):
         # user's browser's address bar by redirecting back to the
         # service_url, which should have the ticket stripped from it
 
-        # Comento el redirect porque si no se piden dos veces todos los recursos de la pagina
-        # con el ticket en la url y al hacer el redirect
-        # request.RESPONSE.redirect(creds['service_url'], lock=True)
+        # Habiamos comentado el redirect por temas de rendimiento. Si no esta comentado se piden dos veces todos los recursos de la pagina
+        # con el ticket en la url y sin el al hacer el redirect. Pero es mejor no mostrar el ticket en la url.
+        request.RESPONSE.redirect(creds['service_url'], lock=True)
 
         return creds
 
