@@ -4,6 +4,7 @@
 *.mo
 .installed.cfg
 .mr.developer.cfg
+.DS_Store
 bin/
 build/
 buildout.cfg
