@@ -1,11 +1,11 @@
 Changelog
 =========
 
-1.1 (unreleased)
+1.1 (2024-03-07)
 ----------------
 
-- Nothing changed yet.
-
+* Add .DS_Store in gitignore [Pilar Marinas]
+* Solucionar que quite el ticket de la url tanto para validar como al acceder [Pilar Marinas]
 
 1.0 (2023-09-12)
 ----------------
